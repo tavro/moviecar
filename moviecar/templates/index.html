@@ -1,0 +1,112 @@
+<style>
+    .content {
+        margin:0px;
+        padding:0px;
+    }
+
+    .left {
+        width: 50%;
+        height: 100%;
+        margin:0px;
+        padding:0px;
+        background-color: lightgray;
+        float: left;
+    }
+
+    .right {
+        width: 50%;
+        height: 100%;
+        margin:0px;
+        padding:0px;
+        background-color: rgb(180, 180, 180);
+        float: left;
+    }
+
+    hr {
+        height: 1px;
+        color: black;
+        width: 50%;
+    }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    h3 {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    a {
+        font-size: 18px;
+    }
+
+    li {
+        border: 1px solid black;
+        width: 256px;
+        height: 512px;
+        padding: 8px;
+        list-style-type: none;
+        margin-bottom: 8px;
+        margin-right: 8px;
+        float: left;
+        background-color: white;
+    }
+
+    img {
+        margin-top: 8px;
+        width: 256px;
+        height: 384px;
+        border: 1px solid black;
+    }
+
+    .form {
+        width: 50%;
+        margin: auto;
+    }
+</style>
+
+<div class="content">
+    <div class="left">
+        <h3>Movies you want to watch</h3>
+        <div class="form">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label for="name">NAME:</label>
+                <input type="text" id="name" name="name"><br>
+                <label for="url">IMG URL:</label>
+                <input type="text" id="url" name="url"><br>
+                <button type="submit">ADD MOVIE</button>
+            </form>
+        </div>
+        <hr>
+        {% if movie_list %}
+            <ul>
+            {% for movie in movie_list %}
+                {% if not movie.have_watched %}
+                <li><center><a href="/{{ movie.id }}/">{{ movie.title }}</a></center><img src="{{ movie.img }}"/></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>There are no movies you want to watch.</p>
+        {% endif %}
+    </div>
+
+    <div class="right">
+        <h3>Movies you have watched</h3>
+        <hr>
+        {% if movie_list %}
+            <ul>
+            {% for movie in movie_list %}
+                {% if movie.have_watched %}
+                <li><form><button type="submit">X</button></form><center><a href="/{{ movie.id }}/">{{ movie.title }}</a><span>: {{ movie.rating }}/10</span></center><img src="{{ movie.img }}"/><p>{{ movie.review }}...</p></li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>There are no movies you want to watch.</p>
+        {% endif %}
+    </div>
+</div>
