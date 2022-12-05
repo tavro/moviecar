@@ -9,7 +9,6 @@
         height: 100%;
         margin:0px;
         padding:0px;
-        background-color: lightgray;
         float: left;
     }
 
@@ -18,7 +17,6 @@
         height: 100%;
         margin:0px;
         padding:0px;
-        background-color: rgb(180, 180, 180);
         float: left;
     }
 
@@ -65,6 +63,28 @@
         width: 50%;
         margin: auto;
     }
+
+    .label {
+        margin-top: 8px;
+    }
+
+    input[type=text] {
+        width: 100%;
+        padding: 6px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+    
+    button {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 8px 0px;
+        cursor: pointer;
+        width: 100%;
+    }
 </style>
 
 <div class="content">
@@ -73,9 +93,13 @@
         <div class="form">
             <form action="" method="POST">
                 {% csrf_token %}
-                <label for="name">NAME:</label>
+                <div class="label">
+                    <label for="name">Name:</label>
+                </div>
                 <input type="text" id="name" name="name"><br>
-                <label for="url">IMG URL:</label>
+                <div class="label">
+                    <label for="url">Img URL:</label>
+                </div>
                 <input type="text" id="url" name="url"><br>
                 <button type="submit">ADD MOVIE</button>
             </form>
@@ -101,7 +125,7 @@
             <ul>
             {% for movie in movie_list %}
                 {% if movie.have_watched %}
-                <li><form><button type="submit">X</button></form><center><a href="/{{ movie.id }}/">{{ movie.title }}</a><span>: {{ movie.rating }}/10</span></center><img src="{{ movie.img }}"/><p>{{ movie.review }}...</p></li>
+                <li><center><a href="/{{ movie.id }}/">{{ movie.title }}</a><span>: {{ movie.rating }}/10</span></center><img src="{{ movie.img }}"/><p>{{ movie.review }}...</p></li>
                 {% endif %}
             {% endfor %}
             </ul>

@@ -1,17 +1,71 @@
-<h3>{{ movie.title }}</h3>
-<img src="{{ movie.img }}" width="256px"/>
+<center>
+    <h3>{{ movie.title }}</h3>
+    <img src="{{ movie.img }}" width="256px"/>
+</center>
+
+<style>
+    h3 {
+        font-size: 24px;
+    }
+
+    .movie-form {
+        width: 256px;
+        margin: auto;
+    }
+
+    .label {
+        margin-top: 8px;
+    }
+
+    button {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 8px 0px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    select, textarea {
+        width: 100%;
+    }
+</style>
 
 {% if movie.have_watched %}
-    <p>{{ movie.rating }} / 10</p>
-    <p>{{ movie.review }}</p>
+<style>
+    .details {
+        width: 256px;
+        margin: auto;
+    }
 
-    <a href="#">EDIT</a>
+    a {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 8px 0px;
+        cursor: pointer;
+    }
+</style>
+<div class="details">
+    <p><b>{{ movie.rating }} / 10</b></p>
+    <p><i>{{ movie.review }}</i></p>
+    <a href="/{{ movie.id }}/edit">Edit</a>
+</div>
 {% else %}
-    <form action="/" method="POST">
+<div class="movie-form">
+    <form action="" method="POST">
         {% csrf_token %}
-        <label for="review">REVIEW:</label>
+        <div class="label">
+            <label for="review">Review:</label>
+        </div>
         <textarea type="text" id="review" name="review"></textarea><br>
-        <label for="rating">RATING:</label>
+        <div class="label">
+            <label for="rating">Rating:</label>
+        </div>
         <select id="rating" name="rating">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -27,4 +81,5 @@
         <br>
         <button type="submit">SUBMIT</button>
     </form>
+</div>
 {% endif %}

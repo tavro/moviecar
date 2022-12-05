@@ -1,0 +1,61 @@
+<center>
+    <h3>{{ movie.title }}</h3>
+    <img src="{{ movie.img }}" width="256px"/>
+</center>
+
+<style>
+    h3 {
+        font-size: 24px;
+    }
+
+    .movie-form {
+        width: 256px;
+        margin: auto;
+    }
+
+    .label {
+        margin-top: 8px;
+    }
+
+    button {
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 8px 0px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    select, textarea {
+        width: 100%;
+    }
+</style>
+
+<div class="movie-form">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="label">
+            <label for="review">Review:</label>
+        </div>
+        <textarea type="text" id="review" name="review" placeholder="{{ movie.review }}"></textarea><br>
+        <div class="label">
+            <label for="rating">Rating:</label>
+        </div>
+        <select id="rating" name="rating" value="{{ movie.rating }}">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select> 
+        <br>
+        <button type="submit">SUBMIT</button>
+    </form>
+</div>
